@@ -88,4 +88,4 @@ def transformacja_gamma(obraz, gamma):
         return obraz.point(lambda i: (i / 255) ** (1 / gamma) * 255)
 
 # test = transformacja_gamma(im, 150)
-# test.show()
+#  test.show()
