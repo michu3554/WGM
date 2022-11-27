@@ -37,9 +37,10 @@ def wstaw_inicjaly_maska(obraz, inicjaly, m, n, x, y, z):
 
 # obraz2 = wstaw_inicjaly_maska(im, inicjaly, 770, 974, -255, 255, -255)
 # obraz2.show()
-# obraz2.save("obraz1.png")
+# obraz2.save("obraz2.png")
 
 def wstaw_inicjaly_load(obraz, inicjaly, m, n, kolor):
+    obraz = obraz.copy()
     pix = obraz.load()
     pix2 = inicjaly.load()
     w, h, = obraz.size
@@ -53,7 +54,6 @@ def wstaw_inicjaly_load(obraz, inicjaly, m, n, kolor):
     return obraz
 
 # test = wstaw_inicjaly_load(im, inicjaly, 1440, 1998, (255, 0, 0))
-# test.show()
 
 def wstaw_inicjaly_maska_load(obraz, inicjaly, m, n, x, y, z):
     pix = obraz.load()
@@ -66,8 +66,19 @@ def wstaw_inicjaly_maska_load(obraz, inicjaly, m, n, x, y, z):
                 pix[i + m, j + n] = (x, y, z)
     return obraz
 
-# test = wstaw_inicjaly_maska_load(im, inicjaly, 770, 974, -255, 255, -255)
-# test.show()
+# test1 = wstaw_inicjaly_maska_load(im, inicjaly, 770, 974, -255, 255, -255)
+
+# fig = plt.figure(figsize=(16, 8))
+# plt.subplot(1,2,1)
+# plt.axis('off')
+# plt.imshow(test)
+# plt.subplot(1,2,2)
+# plt.axis('off')
+# plt.imshow(test1)
+# plt.savefig('zad3.png')
+# plt.show()
+
+
 
 def kontrast(obraz, wsp_kontrastu):
     mn = ((255 + wsp_kontrastu) / 255) ** 2
@@ -87,5 +98,16 @@ def transformacja_gamma(obraz, gamma):
     if gamma > 0:
         return obraz.point(lambda i: (i / 255) ** (1 / gamma) * 255)
 
-# test = transformacja_gamma(im, 150)
-#  test.show()
+# test = transformacja_gamma(im, 2)
+# test.show()
+
+def rozjasnij(obraz, liczba):
+    obraz1 = obraz.copy()
+    T = np.array(obraz1, dtype='uint8')
+    T1 = T + liczba
+    T1[T > (255 - liczba)] = 255
+    obraz_wynik = Image.fromarray(T1, "RGB")
+    return obraz_wynik
+
+# test = rozjasnij(im, 100)
+# test.show()
